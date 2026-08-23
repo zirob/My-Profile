@@ -8,7 +8,7 @@ The goal of this project is to build my personal portfolio while gaining hands-o
 
 The idea is building and configuring the infrastructure step by step.
 
-## AWS Infrastructure
+## AWS Infrastructure and Deploytment
 
 ### Amazon EC2
 
@@ -46,6 +46,10 @@ I can connect using:
 ```bash
 ssh my-web-server
 ```
+### Nginx
+
+* boot of Nginx in EC2 inctance. OK
+* Checking of Access by http. OK
 
 ## Current Progress
 
@@ -64,3 +68,6 @@ Next steps will include configuring the web server, deploying the portfolio webs
 * HTML
 * CSS
 * JavaScript
+
+## Development
+
