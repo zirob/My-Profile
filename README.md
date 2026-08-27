@@ -106,3 +106,60 @@ Next steps will include configuring the web server, deploying the portfolio webs
 
 ## Development
 
+The first version of the portfolio homepage was built without frameworks, using semantic HTML, CSS, and vanilla JavaScript. The code is separated by responsibility to keep the project simple and easy to maintain.
+
+### Project Structure
+
+```text
+My-Profile/
+├── index.html
+├── css/
+│   └── styles.css
+├── js/
+│   └── script.js
+├── img/
+├── README.md
+└── .gitignore
+```
+
+### Homepage Sections
+
+The single-page homepage includes:
+
+* A hero section with an introduction and navigation links.
+* An About Me section describing my learning goals and interests.
+* A Work Experience section using a simple timeline layout.
+* A Projects section highlighting the portfolio infrastructure and website.
+* A Skills section organized by cloud, systems, development, and practices.
+* A Hobbies section for interests outside of work.
+* A footer with an automatically updated copyright year.
+
+### Responsive Design
+
+The layout adapts to desktop, tablet, and mobile screen sizes. On smaller screens, the navigation becomes a collapsible menu and multi-column content changes to a single-column layout.
+
+The stylesheet also includes reduced-motion support for users who enable that accessibility preference in their operating system.
+
+### JavaScript
+
+The JavaScript is intentionally lightweight and is used to:
+
+* Open and close the navigation menu on mobile devices.
+* Close the mobile menu after a navigation link is selected.
+* Set the current year in the footer automatically.
+
+### Running Locally
+
+No installation or build process is required. Open `index.html` directly in a web browser, or serve the project with a local web server.
+
+For example, with Python installed:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then visit `http://localhost:8000` in a browser.
+
+### Customization
+
+Portfolio content can be updated directly in `index.html`. Visual styles and responsive rules are stored in `css/styles.css`, while interactive behavior is stored in `js/script.js`. Future images and other visual assets can be placed in the `img/` directory.
