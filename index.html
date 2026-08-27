@@ -3,14 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile</title>
+  <meta name="description" content="Boris Ramirez's portfolio, experience, projects, and technical skills.">
+  <title>Boris Ramirez | Portfolio</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <main>
-    <h1>My Profile</h1>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top" aria-label="Go to homepage">BR<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Toggle navigation</span><span></span><span></span><span></span>
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#hobbies">Hobbies</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-content">
+        <p class="eyebrow">Hello, I'm</p>
+        <h1>Boris Ramirez</h1>
+        <p class="hero-title">Cloud &amp; DevOps Enthusiast</p>
+        <p class="hero-copy">I enjoy building reliable infrastructure, learning how systems work, and turning ideas into practical web projects.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#projects">View my work</a><a class="button button-secondary" href="#about">More about me</a></div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container narrow">
+        <p class="section-label">About me</p><h2>Learning by building</h2>
+        <p class="lead">I am developing my skills in cloud infrastructure, Linux, networking, and DevOps through hands-on projects. I care about secure, understandable systems and continuous improvement.</p>
+        <p>This portfolio is part of that journey: it is built from scratch and will be deployed and managed on AWS as the infrastructure evolves.</p>
+      </div>
+    </section>
+
+    <section id="experience" class="section section-alt">
+      <div class="container">
+        <p class="section-label">Work experience</p><h2>Where I've contributed</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-meta"><p>Present</p></div>
+            <div><h3>Building practical cloud experience</h3><p class="item-subtitle">Independent learning &amp; projects</p><p>Designing and configuring AWS infrastructure while documenting decisions around access, security, deployment, and web hosting.</p></div>
+          </article>
+          <article class="timeline-item">
+            <div class="timeline-meta"><p>Your dates</p></div>
+            <div><h3>Your role</h3><p class="item-subtitle">Company name</p><p>Add a concise description of your responsibilities, achievements, and the value you brought to the team.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <p class="section-label">Projects</p><h2>Things I'm building</h2>
+        <div class="card-grid">
+          <article class="card"><p class="card-number">01</p><h3>Personal Portfolio Infrastructure</h3><p>A portfolio hosted on an Amazon EC2 instance with Nginx, an Elastic IP, and secure administration through AWS Systems Manager Session Manager.</p><ul class="tag-list" aria-label="Technologies used"><li>AWS</li><li>EC2</li><li>Linux</li><li>Nginx</li></ul></article>
+          <article class="card"><p class="card-number">02</p><h3>This Portfolio Website</h3><p>A responsive, accessible personal site built with semantic HTML, modern CSS, and lightweight JavaScript—without a framework.</p><ul class="tag-list" aria-label="Technologies used"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li></ul></article>
+          <article class="card card-placeholder"><p class="card-number">03</p><h3>Next project</h3><p>This space is ready for the next challenge, experiment, or useful tool I build.</p><ul class="tag-list" aria-label="Project status"><li>Coming soon</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section section-alt">
+      <div class="container">
+        <p class="section-label">Skills</p><h2>Tools and technologies</h2>
+        <div class="skills-grid">
+          <article><h3>Cloud</h3><p>AWS, Amazon EC2, Systems Manager, IAM</p></article><article><h3>Systems</h3><p>Linux, Nginx, SSH, networking fundamentals</p></article><article><h3>Development</h3><p>HTML, CSS, JavaScript, Git, GitHub</p></article><article><h3>Practices</h3><p>Security basics, documentation, troubleshooting</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="hobbies" class="section">
+      <div class="container narrow">
+        <p class="section-label">Outside of work</p><h2>Hobbies and interests</h2>
+        <p class="lead">When I'm away from the terminal, I make time for the interests that keep me curious and balanced.</p>
+        <div class="hobby-list"><span>Technology</span><span>Continuous learning</span><span>Personal projects</span></div>
+      </div>
+    </section>
   </main>
 
+  <footer class="site-footer"><div class="container footer-inner"><p>Designed and built by Boris Ramirez.</p><p>&copy; <span id="current-year"></span> All rights reserved.</p></div></footer>
   <script src="js/script.js"></script>
 </body>
 </html>
