@@ -17,17 +17,20 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
 .section { padding: clamp(4.5rem, 9vw, 7.5rem) 0; scroll-margin-top: 4.5rem; }
 .section-alt { background: var(--surface-alt); }
 .section-label, .eyebrow { margin-bottom: .75rem; color: var(--accent); font-size: .78rem; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; }
-.lead { color: var(--text); font-size: clamp(1.15rem, 2.5vw, 1.4rem); }
+.lead { color: var(--text); font-size: clamp(1.15rem, 2.5vw, 1.4rem); white-space: pre-line; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .site-header { position: sticky; z-index: 10; top: 0; border-bottom: 1px solid rgba(220,227,232,.85); background: rgba(247,248,250,.94); backdrop-filter: blur(12px); }
-.header-inner { display: flex; min-height: 4.5rem; align-items: center; justify-content: space-between; }
+.header-inner { position: relative; display: flex; min-height: 4.5rem; align-items: center; gap: 1.5rem; }
 .logo { text-decoration: none; font-size: 1.35rem; font-weight: 800; letter-spacing: -.05em; }
 .logo span { color: var(--accent); }
-.site-nav { display: flex; gap: 1.75rem; }
+.site-nav { display: flex; gap: 1.75rem; margin-left: auto; }
 .site-nav a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 650; }
 .site-nav a:hover, .site-nav a:focus-visible { color: var(--accent); }
 .menu-toggle { display: none; padding: .5rem; border: 0; background: transparent; cursor: pointer; }
 .menu-toggle span:not(.sr-only) { display: block; width: 1.5rem; height: 2px; margin: 4px 0; background: var(--text); }
+.language-switcher { position: absolute; left: calc(100% + 3rem); display: flex; align-items: center; gap: .3rem; color: var(--border); font-size: .8rem; white-space: nowrap; }
+.language-button { padding: .25rem; border: 0; color: var(--muted); background: transparent; font: inherit; font-weight: 750; cursor: pointer; }
+.language-button:hover, .language-button:focus-visible, .language-button.is-active { color: var(--accent); }
 .hero { display: grid; min-height: calc(100vh - 4.5rem); min-height: calc(100svh - 4.5rem); align-items: center; padding: 5rem 0; }
 .hero-content { max-width: var(--max-width); }
 .hero-title { margin-bottom: 1.25rem; color: var(--accent); font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 650; }
@@ -43,6 +46,7 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
 .timeline-meta p, .item-subtitle { color: var(--accent); font-weight: 650; }
 .timeline-item p:last-child { margin-bottom: 0; color: var(--muted); }
 .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.card-centered { grid-column: 2; }
 .card { display: flex; min-height: 320px; flex-direction: column; padding: 1.75rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
 .card:hover { border-color: #a9c2cc; transform: translateY(-3px); transition: 180ms ease; }
 .card p { color: var(--muted); }
@@ -60,13 +64,20 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
 .site-footer { padding: 2rem 0; color: #d9e2e7; background: var(--text); font-size: .9rem; }
 .footer-inner { display: flex; justify-content: space-between; gap: 1rem; }
 .footer-inner p { margin-bottom: 0; }
+@media (max-width: 1280px) {
+  .language-switcher { position: static; margin-left: 0; }
+}
 @media (max-width: 760px) {
   .menu-toggle { display: block; }
+  .header-inner { gap: .75rem; }
+  .menu-toggle { order: 3; }
+  .language-switcher { margin-left: auto; }
   .site-nav { position: absolute; top: 100%; right: 0; left: 0; display: none; flex-direction: column; gap: 0; padding: .75rem 1.25rem 1rem; border-bottom: 1px solid var(--border); background: var(--bg); }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: .7rem 0; }
   .timeline-item { grid-template-columns: 1fr; gap: .25rem; }
   .card-grid, .skills-grid { grid-template-columns: 1fr; }
+  .card-centered { grid-column: auto; }
   .card { min-height: 270px; }
   .skills-grid article, .skills-grid article:nth-child(even) { padding: 1.5rem 0; border-right: 0; }
   .footer-inner { flex-direction: column; gap: .25rem; }
