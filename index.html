@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Boris Ramirez's portfolio, experience, projects, and technical skills.">
   <title>Boris Ramirez | Portfolio</title>
-  <link rel="stylesheet" href="css/styles.css?v=2">
+  <link rel="stylesheet" href="css/styles.css?v=16">
 </head>
 <body>
   <header class="site-header">
@@ -28,11 +28,16 @@
   <main id="top">
     <section class="hero">
       <div class="container hero-content">
-        <p class="eyebrow" data-i18n="heroGreeting">Hello, I'm</p>
-        <h1>Boris Ramirez</h1>
-        <p class="hero-title" data-i18n="heroTitle">Cloud &amp; DevOps Enthusiast</p>
-        <p class="hero-copy" data-i18n="heroCopy">I enjoy building reliable infrastructure, learning how systems work, and turning ideas into practical web projects.</p>
-        <div class="hero-actions"><a class="button button-primary" href="#projects" data-i18n="viewWork">View my work</a><a class="button button-secondary" href="#about" data-i18n="moreAbout">More about me</a></div>
+        <div class="hero-text">
+          <p class="eyebrow" data-i18n="heroGreeting">Hello, I'm</p>
+          <h1>Boris Ramirez</h1>
+          <p class="hero-title" data-i18n="heroTitle">Cloud &amp; DevOps Enthusiast</p>
+          <p class="hero-copy" data-i18n="heroCopy">I enjoy building reliable infrastructure, learning how systems work, and turning ideas into practical web projects.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#projects" data-i18n="viewWork">View my work</a><a class="button button-secondary" href="#about" data-i18n="moreAbout">More about me</a></div>
+        </div>
+        <figure class="profile-photo hero-photo">
+          <img src="img/Photo_of_Portfolio.png" alt="Portrait of Boris Ramirez" data-i18n-alt="profilePhotoAlt">
+        </figure>
       </div>
     </section>
 
@@ -80,7 +85,7 @@
       <div class="container">
         <p class="section-label" data-i18n="projectsLabel">Projects</p><h2 data-i18n="projectsTitle">Things I'm building</h2>
         <div class="card-grid">
-          <article class="card card-centered"><p class="card-number">01</p><h3 data-i18n="projectOneTitle">Personal Portfolio Infrastructure</h3><p data-i18n="projectOneCopy">A portfolio hosted on an Amazon EC2 instance with Nginx, an Elastic IP, and secure administration through AWS Systems Manager Session Manager.</p><ul class="tag-list" aria-label="Technologies used"><li>AWS</li><li>EC2</li><li>Linux</li><li>Nginx</li></ul></article>
+          <article class="card card-centered"><p class="card-number">01</p><h3 data-i18n="projectOneTitle">Personal Portfolio Infrastructure</h3><p data-i18n="projectOneCopy">A portfolio hosted on an Amazon EC2 instance with Nginx, an Elastic IP, and secure administration through AWS Systems Manager Session Manager.</p><a class="project-link" href="https://github.com/zirob/My-Profile" target="_blank" rel="noopener noreferrer"><span data-i18n="viewRepository">View on GitHub</span><span aria-hidden="true">↗</span></a><ul class="tag-list" aria-label="Technologies used"><li>AWS</li><li>EC2</li><li>Linux</li><li>Nginx</li></ul></article>
           <!--<article class="card"><p class="card-number">02</p><h3 data-i18n="projectTwoTitle">This Portfolio Website</h3><p data-i18n="projectTwoCopy">A responsive, accessible personal site built with semantic HTML, modern CSS, and lightweight JavaScript—without a framework.</p><ul class="tag-list" aria-label="Technologies used"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li></ul></article>
           <article class="card card-placeholder"><p class="card-number">03</p><h3 data-i18n="nextProject">Next project</h3><p data-i18n="nextProjectCopy">This space is ready for the next challenge, experiment, or useful tool I build.</p><ul class="tag-list" aria-label="Project status"><li data-i18n="comingSoon">Coming soon</li></ul></article>-->
         </div>
@@ -106,6 +111,6 @@
   </main>
 
   <footer class="site-footer"><div class="container footer-inner"><p data-i18n="builtBy">Designed and built by Boris Ramirez.</p><p>&copy; <span id="current-year"></span> <span data-i18n="rights">All rights reserved.</span></p></div></footer>
-  <script src="js/script.js?v=3"></script>
+  <script src="js/script.js?v=4"></script>
 </body>
 </html>

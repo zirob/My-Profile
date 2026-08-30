@@ -101,7 +101,21 @@ The instance can now be administered without exposing SSH directly to the intern
 
 ## Releases
 
+### v1.1.0 — Portfolio Visual Update
+
+This version improves the homepage presentation and makes the featured project easier to access while preserving the original structure and functionality introduced in `v1.0.0`.
+
+* Added a responsive profile photo beside the name in the hero section.
+* Refined the photo crop, size, framing, and subtle grey background shadow.
+* Centered the desktop navigation while preserving the existing language selector and responsive mobile menu.
+* Added a direct GitHub link from project 01 to the [`My-Profile` repository](https://github.com/zirob/My-Profile).
+* Added bilingual text for the new GitHub repository link.
+* Introduced the AWS orange color (`#FF9900`) for the hero action buttons.
+* Applied the same orange accent only to the currently selected language; the unselected language remains grey.
+* Preserved visible keyboard-focus feedback for the language controls.
+
 ### v1.0.0 — First Version
+
  The first version of the portfolio homepage was built without frameworks, using semantic HTML, CSS, and vanilla JavaScript. The code is separated by responsibility to keep the project simple and easy to maintain.
  
 * Initial responsive website layout
