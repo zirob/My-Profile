@@ -8,7 +8,7 @@ The goal of this project is to build my personal portfolio while gaining hands-o
 
 The idea is building and configuring the infrastructure step by step.
 
-## AWS Infrastructure and Deploytment
+## AWS Infrastructure and Deployment
 
 ### Amazon EC2
 
@@ -55,7 +55,7 @@ EC2 instance
 ssm-user
 ```
 
-### Configuration
+### Access Configuration
 
 * Attached an IAM role to the EC2 instance with the AmazonSSMManagedInstanceCore policy.
 * Verified that Session Manager worked through the AWS Console.
@@ -78,14 +78,218 @@ aws ssm start-session \
 
 ### Nginx
 
-* boot of Nginx in EC2 inctance. OK
-* Checking of Access by http. OK
+* Installed and started Nginx on the EC2 instance.
+* Linked Nginx's web root to the cloned project directory:
 
-### Security Improvement
+```bash
+sudo ln -s /var/www/My-Profile/ /usr/share/nginx/html
+```
 
-After confirming Session Manager access, I removed the inbound SSH rule for port 22 from the EC2 Security Group.
+* Verified that the portfolio is served successfully from the instance's root HTTP URL.
+```text
+http://<EC2-ELASTIC-IP>/
+```
+### Domain and DNS
 
-The instance can now be administered without exposing SSH directly to the internet.
+The portfolio is publicly accessible through a custom domain secured with HTTPS.
+
+### Domain Registration
+
+The domain was registered with **Porkbun**:
+
+```text
+borisramirez.com
+```
+
+Porkbun is used as the domain registrar, while **Amazon Route 53** is used as the authoritative DNS service.
+
+The Route 53 nameservers assigned to the hosted zone were configured in Porkbun so that DNS management is delegated to AWS.
+
+```text
+Porkbun
+   │
+   │ Nameserver delegation
+   ▼
+Route 53
+```
+
+### Route 53 Hosted Zone
+
+A **Public Hosted Zone** was created in Amazon Route 53 for:
+
+```text
+borisramirez.com
+```
+
+Route 53 automatically created the required **NS** and **SOA** records.
+
+The DNS configuration was verified from the terminal using:
+
+```bash
+dig NS borisramirez.com
+```
+
+This command queries DNS for the authoritative nameservers associated with the domain.
+
+### DNS Records
+
+An **A record** was created to point the root domain to the EC2 Elastic IP:
+
+```text
+Type:  A
+Name:  borisramirez.com
+Value: <EC2_ELASTIC_IP>
+TTL:   300
+```
+
+The DNS resolution can be verified with:
+
+```bash
+dig borisramirez.com
+```
+
+The expected result is the Elastic IP assigned to the EC2 instance.
+
+The resolution flow is:
+
+```text
+borisramirez.com
+      │
+      │ A record
+      ▼
+EC2 Elastic IP
+```
+### WWW Domain — CNAME Record
+
+A **CNAME record** was created for the `www` hostname:
+
+```text
+Type:  CNAME
+Name:  www.borisramirez.com
+Value: borisramirez.com
+TTL:   300
+```
+
+The CNAME makes `www.borisramirez.com` an alias of the root domain.
+
+```text
+www.borisramirez.com
+        │
+        │ CNAME
+        ▼
+borisramirez.com
+        │
+        │ A record
+        ▼
+EC2 Elastic IP
+```
+
+This allows both hostnames to reach the same web server:
+
+```text
+borisramirez.com
+www.borisramirez.com
+```
+
+### Nginx Domain Configuration
+
+Nginx was configured to recognize both domain names.
+
+The `server_name` directive contains:
+
+```nginx
+server_name borisramirez.com www.borisramirez.com;
+```
+
+The Nginx configuration can be validated before applying changes:
+
+```bash
+sudo nginx -t
+```
+
+Then the configuration can be reloaded without stopping the web server:
+
+```bash
+sudo systemctl reload nginx
+```
+### HTTPS with Let's Encrypt and Certbot
+
+HTTPS is implemented using a TLS certificate issued by **Let's Encrypt** and managed with **Certbot**.
+
+The required packages were installed on Amazon Linux 2023:
+
+```bash
+sudo dnf install -y certbot python3-certbot-nginx
+```
+
+The certificate was initially requested for the root domain:
+
+```bash
+sudo certbot --nginx -d borisramirez.com
+```
+
+The certificate was later expanded to protect both hostnames:
+
+```bash
+sudo certbot --nginx \
+  -d borisramirez.com \
+  -d www.borisramirez.com
+```
+
+Certbot performs several tasks automatically:
+
+1. Communicates with Let's Encrypt.
+2. Validates control of the domain.
+3. Requests the TLS certificate.
+4. Installs the certificate for Nginx.
+5. Configures automatic certificate renewal.
+
+### TLS Certificate
+
+The certificate files are stored under:
+
+```text
+/etc/letsencrypt/live/borisramirez.com/
+```
+
+The main files used by Nginx are:
+
+```text
+fullchain.pem
+privkey.pem
+```
+
+Nginx references them with configuration similar to:
+
+```nginx
+ssl_certificate /etc/letsencrypt/live/borisramirez.com/fullchain.pem;
+ssl_certificate_key /etc/letsencrypt/live/borisramirez.com/privkey.pem;
+```
+
+The certificate secures communication between the browser and Nginx:
+
+```text
+Browser
+   │
+   │ TLS encrypted connection
+   ▼
+HTTPS :443
+   │
+   ▼
+Nginx
+```
+
+### Security Group
+
+The EC2 Security Group allows public web traffic on:
+
+| Protocol | Port | Purpose |
+|---|---:|---|
+| HTTP | 80 | Web traffic and HTTP validation/redirect |
+| HTTPS | 443 | Encrypted web traffic |
+
+Public SSH access on port `22` is not required for administration because the instance is managed through **AWS Systems Manager Session Manager**.
+
 
 ## Technologies Used
 
@@ -99,6 +303,29 @@ The instance can now be administered without exposing SSH directly to the intern
 * CSS
 * JavaScript
 
+### Final Deployment Architecture
+
+```text
+Internet
+   ↓
+borisramirez.com / www.borisramirez.com
+   ↓
+Porkbun (Domain Registrar)
+   ↓ DNS delegation
+Amazon Route 53
+   ↓
+18.188.73.65 (Elastic IP)
+   ↓
+Amazon EC2
+   ↓
+Nginx + TLS Certificate
+   ↓
+/usr/share/nginx/html
+   ↓ symbolic link
+/var/www/My-Profile
+
+```
+
 ## Releases
 
 ### v1.1.0 — Portfolio Visual Update
@@ -106,6 +333,7 @@ The instance can now be administered without exposing SSH directly to the intern
 This version improves the homepage presentation and makes the featured project easier to access while preserving the original structure and functionality introduced in `v1.0.0`.
 
 * Added a responsive profile photo beside the name in the hero section.
+* Converted the profile photo to WebP format (`img/Photo_of_Portfolio.webp`) to reduce its file size and improve page loading performance.
 * Refined the photo crop, size, framing, and subtle grey background shadow.
 * Centered the desktop navigation while preserving the existing language selector and responsive mobile menu.
 * Added a direct GitHub link from project 01 to the [`My-Profile` repository](https://github.com/zirob/My-Profile).
