@@ -314,7 +314,7 @@ Porkbun (Domain Registrar)
    ↓ DNS delegation
 Amazon Route 53
    ↓
-18.188.73.65 (Elastic IP)
+<EC2_ELASTIC_IP> (Elastic IP)
    ↓
 Amazon EC2
    ↓
