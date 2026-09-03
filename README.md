@@ -293,15 +293,10 @@ Public SSH access on port `22` is not required for administration because the in
 
 ## Technologies Used
 
-* AWS
-* Amazon EC2
-* Linux
-* SSH
-* Git
-* GitHub
-* HTML
-* CSS
-* JavaScript
+* **AWS services:** Amazon EC2, Route 53, Systems Manager, IAM, Elastic IP
+* **Systems and infrastructure:** Linux (RHEL), Nginx, SSH, DNS, TLS/HTTPS, VMware, Cisco UCS
+* **Development and automation:** HTML, CSS, JavaScript, PHP, MySQL, Bash, Git, GitHub
+* **Operations and practices:** monitoring, troubleshooting, deployments, patching, documentation, security fundamentals
 
 ### Final Deployment Architecture
 
