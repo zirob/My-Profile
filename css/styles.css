@@ -24,8 +24,11 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
 .logo { text-decoration: none; font-size: 1.35rem; font-weight: 800; letter-spacing: -.05em; }
 .logo span { color: var(--accent); }
 .site-nav { position: absolute; left: 50%; display: flex; gap: 1.75rem; transform: translateX(-50%); }
-.site-nav a { color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 650; }
+.site-nav a { position: relative; color: var(--muted); text-decoration: none; font-size: .9rem; font-weight: 650; transition: color 180ms ease; }
 .site-nav a:hover, .site-nav a:focus-visible { color: var(--accent); }
+.site-nav a::after { position: absolute; right: 0; bottom: -.55rem; left: 0; height: 2px; border-radius: 99px; background: #ff9900; content: ""; transform: scaleX(0); transition: transform 180ms ease; }
+.site-nav a.is-active { color: #ff9900; }
+.site-nav a.is-active::after { transform: scaleX(1); }
 .menu-toggle { display: none; padding: .5rem; border: 0; background: transparent; cursor: pointer; }
 .menu-toggle span:not(.sr-only) { display: block; width: 1.5rem; height: 2px; margin: 4px 0; background: var(--text); }
 .language-switcher { position: absolute; left: calc(100% + 3rem); display: flex; align-items: center; gap: .3rem; color: var(--border); font-size: .8rem; white-space: nowrap; }
@@ -37,7 +40,7 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
 .hero-content { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center; max-width: var(--max-width); }
 .hero-text { min-width: 0; }
 .hero-text h1 { font-size: clamp(3rem, 6vw, 5.6rem); }
-.hero-title { margin-bottom: 1.25rem; color: var(--accent); font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 650; }
+.hero-title { margin-bottom: 1.25rem; color: var(--accent); font-size: clamp(1rem, 1.45vw, 1.3rem); font-weight: 650; letter-spacing: -.015em; white-space: nowrap; }
 .hero-copy { max-width: 670px; color: var(--muted); font-size: 1.1rem; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
 .button { display: inline-block; padding: .75rem 1.1rem; border: 1px solid #ff9900; border-radius: 8px; text-decoration: none; font-weight: 700; transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease; }
@@ -114,6 +117,8 @@ h3 { margin-bottom: .65rem; font-size: 1.25rem; }
   .site-nav { position: absolute; top: 100%; right: 0; left: 0; display: none; flex-direction: column; gap: 0; padding: .75rem 1.25rem 1rem; border-bottom: 1px solid var(--border); background: var(--bg); transform: none; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: .7rem 0; }
+  .site-nav a::after { bottom: .35rem; width: 2.5rem; }
+  .hero-title { white-space: normal; }
   .timeline-item { grid-template-columns: 1fr; gap: .25rem; }
   .profile-photo { width: min(92%, 480px); margin-inline: auto; }
   .card-grid, .skills-grid { grid-template-columns: 1fr; }

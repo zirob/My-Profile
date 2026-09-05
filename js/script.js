@@ -5,14 +5,16 @@ const navigation = document.querySelector(".site-nav");
 const navigationLinks = document.querySelectorAll(".site-nav a");
 const year = document.querySelector("#current-year");
 const languageButtons = document.querySelectorAll(".language-button");
+const sections = document.querySelectorAll("main section[id]");
+const siteHeader = document.querySelector(".site-header");
 
 const translations = {
   en: {
     pageTitle: "Boris Ramirez | Portfolio", description: "Boris Ramirez's portfolio, experience, projects, and technical skills.", logoLabel: "Go to homepage", menuToggle: "Toggle navigation", languageLabel: "Select language", profilePhotoAlt: "Portrait of Boris Ramirez",
     navAbout: "About", navExperience: "Experience", navProjects: "Projects", navSkills: "Skills", navHobbies: "Hobbies",
-    heroGreeting: "Hello, I'm", heroTitle: "Cloud & DevOps Enthusiast", heroCopy: "I believe every stage of life is an opportunity to learn, grow, and begin again. Today, I choose to move forward with curiosity, turn challenges into experience, and build a path with purpose and balance.", viewWork: "View my work", moreAbout: "More about me",
+    heroGreeting: "Hello, I'm", heroTitle: "Infrastructure & Platform Engineer | AWS Cloud & DevOps", heroCopy: "I believe every stage of life is an opportunity to learn, grow, and begin again. Today, I choose to move forward with curiosity, turn challenges into experience, and build a path with purpose and balance.", viewWork: "View projects", moreAbout: "More about me",
     aboutLabel: "About me", aboutTitle: "Building a new chapter", aboutLead: "I am a curious and persistent person with a constant need to learn. Throughout my professional life, I have faced different challenges, technologies, and stages that have taught me that growth often means daring to begin again.\n\nToday, I am living through one of those stages. After years of experience in technology and infrastructure, I decided to focus my path on Cloud and DevOps, return to studying, build projects from scratch, and challenge myself with new things.\n\nOutside technology, I also value the simple things: spending time with family and friends, enjoying my time, staying active, and continuing to learn. I want to grow professionally, but also to enjoy the process and build a life with purpose and balance.\n\nThis portfolio is a small part of that moment: a place where I can show what I have done, what I am learning, and, above all, where I want to go next.", aboutCopy: "",
-    experienceLabel: "Work experience", experienceTitle: "Where I've contributed", present: "Present", cloudExperienceTitle: "Building practical cloud experience", cloudExperienceSubtitle: "Independent learning & projects", cloudExperienceCopy: "Designing and configuring AWS infrastructure while documenting decisions around access, security, deployment, and web hosting.", yourDates: "May 2020 – Jul 2026", yourRole: "Infrastructure and Platform Engineer", companyName: "CoasinLogicalis", experiencePlaceholder: "Administration and Level 2 support of critical infrastructure for enterprise and telecommunications customers across Latin America, working with Linux, VMware, Cisco UCS, and monitoring platforms. Responsible for investigating and resolving complex production incidents, collaborating with customers, engineering teams, and technology vendors to support service availability, stability, and operational continuity.",
+    experienceLabel: "Work experience", experienceTitle: "Where I've contributed", present: "Present", cloudExperienceTitle: "Cloud & DevOps — Practical Projects", cloudExperienceSubtitle: "AWS · Linux · Infrastructure · Automation", cloudExperienceCopy: "Developing practical Cloud and DevOps projects by designing and implementing infrastructure on AWS and applying previous experience in Linux, systems, networking, security, and automation.", yourDates: "May 2020 – Jul 2026", yourRole: "Infrastructure and Platform Engineer", companyName: "CoasinLogicalis", experiencePlaceholder: "Administration and Level 2 support of critical infrastructure for enterprise and telecommunications customers across Latin America, working with Linux, VMware, Cisco UCS, and monitoring platforms. Responsible for investigating and resolving complex production incidents, collaborating with customers, engineering teams, and technology vendors to support service availability, stability, and operational continuity.",
     experienceThreeDates: "Jul 2018 – May 2020", experienceThreeRole: "Systems Engineer", experienceThreeCompany: "LOGICALIS", experienceThreeCopy: "Support and administration of the Banco Itaú SuperAPP infrastructure across Development, QA, and Production environments, managing 42 RHEL servers and using Puppet Enterprise and Red Hat Satellite for deployments, configuration, and patching. Incident resolution, SSL/TLS certificate administration, and monitoring with Splunk Enterprise to support platform stability and continuity.",
     experienceFourDates: "Mar 2014 – Jul 2018", experienceFourRole: "Deployment Support Specialist", experienceFourCompany: "NOKIA", experienceFourCopy: "Supported the deployment and production readiness of new Nokia AOR platform releases for Telefónica Chile in RHEL environments. Performed IOT/UAT testing, troubleshooting, patch validation, and collaboration with Nokia Spain engineering teams to resolve defects. Developed Bash scripts to automate testing activities.",
     experienceFiveDates: "Apr 2013 – Oct 2013", experienceFiveRole: "Software Developer (Freelance)", experienceFiveCompany: "SRB CORP S.A.", experienceFiveCopy: "Developed new features for Sacyr Chile's web-based ERP system, contributing to requirements gathering and the design and implementation of solutions using PHP, JavaScript, HTML, CSS, and MySQL. Performed functional testing, generated Excel reports, and prepared technical documentation for delivery to the customer.",
@@ -24,9 +26,9 @@ const translations = {
   es: {
     pageTitle: "Boris Ramirez | Portafolio", description: "Portafolio, experiencia, proyectos y habilidades técnicas de Boris Ramirez.", logoLabel: "Ir al inicio", menuToggle: "Abrir o cerrar navegación", languageLabel: "Seleccionar idioma", profilePhotoAlt: "Retrato de Boris Ramirez",
     navAbout: "Sobre mí", navExperience: "Experiencia", navProjects: "Proyectos", navSkills: "Habilidades", navHobbies: "Pasatiempos",
-    heroGreeting: "Hola, soy", heroTitle: "Entusiasta de Cloud y DevOps", heroCopy: "Creo que cada etapa de la vida es una oportunidad para aprender, crecer y volver a comenzar. Hoy elijo avanzar con curiosidad, transformar los desafíos en experiencia y construir un camino con propósito y equilibrio.", viewWork: "Ver mi trabajo", moreAbout: "Más sobre mí",
+    heroGreeting: "Hola, soy", heroTitle: "Infrastructure & Platform Engineer | AWS Cloud & DevOps", heroCopy: "Creo que cada etapa de la vida es una oportunidad para aprender, crecer y volver a comenzar. Hoy elijo avanzar con curiosidad, transformar los desafíos en experiencia y construir un camino con propósito y equilibrio.", viewWork: "Ver proyectos", moreAbout: "Más sobre mí",
     aboutLabel: "Sobre mí", aboutTitle: "Construyendo una nueva etapa", aboutLead: "Soy una persona curiosa, perseverante y con una necesidad constante de aprender. A lo largo de mi vida profesional he pasado por distintos desafíos, tecnologías y etapas que me han enseñado que crecer muchas veces significa atreverse a comenzar de nuevo.\n\nHoy estoy viviendo una de esas etapas. Después de años de experiencia en tecnología e infraestructura, decidí orientar mi camino hacia Cloud y DevOps, volver a estudiar, construir proyectos desde cero y desafiarme con cosas nuevas.\n\nFuera de la tecnología, también valoro las cosas simples: compartir con mi familia y amigos, disfrutar mi tiempo, mantenerme activo y seguir aprendiendo. Busco crecer profesionalmente, pero también disfrutar el proceso y construir una vida con propósito y equilibrio.\n\nEste portafolio es una pequeña parte de ese momento: un lugar donde puedo mostrar lo que he hecho, lo que estoy aprendiendo y, sobre todo, hacia dónde quiero seguir avanzando.", aboutCopy: "",
-    experienceLabel: "Experiencia laboral", experienceTitle: "Dónde he contribuido", present: "Actualidad", cloudExperienceTitle: "Desarrollo de experiencia práctica en cloud", cloudExperienceSubtitle: "Aprendizaje independiente y proyectos", cloudExperienceCopy: "Diseño y configuración de infraestructura AWS, documentando decisiones sobre acceso, seguridad, despliegue y alojamiento web.", yourDates: "May 2020 – Jul 2026", yourRole: "Ingeniero de Infraestructura y Plataformas", companyName: "CoasinLogicalis", experiencePlaceholder: "Administración y soporte de infraestructura crítica de Nivel 2 para clientes empresariales y de telecomunicaciones en Latinoamérica, trabajando con Linux, VMware, Cisco UCS y plataformas de monitoreo. Responsable de investigar y resolver incidentes complejos en producción, colaborando con clientes, equipos de ingeniería y fabricantes tecnológicos para contribuir a la disponibilidad, estabilidad y continuidad operacional de los servicios.",
+    experienceLabel: "Experiencia laboral", experienceTitle: "Dónde he contribuido", present: "Actualidad", cloudExperienceTitle: "Cloud & DevOps — Proyectos prácticos", cloudExperienceSubtitle: "AWS · Linux · Infraestructura · Automatización", cloudExperienceCopy: "Desarrollo de proyectos prácticos orientados a Cloud y DevOps, diseñando e implementando infraestructura en AWS y aplicando experiencia previa en Linux, sistemas, redes, seguridad y automatización.", yourDates: "May 2020 – Jul 2026", yourRole: "Ingeniero de Infraestructura y Plataformas", companyName: "CoasinLogicalis", experiencePlaceholder: "Administración y soporte de infraestructura crítica de Nivel 2 para clientes empresariales y de telecomunicaciones en Latinoamérica, trabajando con Linux, VMware, Cisco UCS y plataformas de monitoreo. Responsable de investigar y resolver incidentes complejos en producción, colaborando con clientes, equipos de ingeniería y fabricantes tecnológicos para contribuir a la disponibilidad, estabilidad y continuidad operacional de los servicios.",
     experienceThreeDates: "Jul 2018 – May 2020", experienceThreeRole: "Ingeniero de Sistemas ", experienceThreeCompany: "LOGICALIS", experienceThreeCopy: "Soporte y administración de la infraestructura de Banco Itaú SuperAPP en ambientes de Desarrollo, QA y Producción, gestionando 42 servidores RHEL y utilizando Puppet Enterprise y Red Hat Satellite para despliegues, configuración y parchado. Resolución de incidentes, administración de certificados SSL/TLS y monitoreo con Splunk Enterprise para contribuir a la estabilidad y continuidad de la plataforma.",
     experienceFourDates: "Mar 2014 – Jul 2018", experienceFourRole: "Especialista de Soporte para Despliegues ", experienceFourCompany: "NOKIA", experienceFourCopy: "Soporte al despliegue y preparación para producción de nuevas versiones de la plataforma Nokia AOR para Telefónica Chile, trabajando en entornos RHEL. Ejecución de pruebas IOT/UAT, troubleshooting, validación de parches y colaboración con equipos de ingeniería de Nokia España para resolver defectos. Desarrollo de scripts Bash para automatizar actividades de prueba.",
     experienceFiveDates: "Abr 2013 – Oct 2013", experienceFiveRole: "Desarrollador de Software (Freelance)", experienceFiveCompany: "SRB CORP S.A.", experienceFiveCopy: "Desarrollo de nuevas funcionalidades para un sistema ERP web de Sacyr Chile, participando en el levantamiento de requerimientos, diseño e implementación de soluciones con PHP, JavaScript, HTML, CSS y MySQL. Ejecución de pruebas funcionales, generación de reportes en Excel y elaboración de documentación técnica para la entrega al cliente.",
@@ -66,6 +68,7 @@ navigationLinks.forEach((link) => {
   link.addEventListener("click", () => {
     navigation.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
+    setActiveNavigation(link.hash.slice(1));
   });
 });
 
@@ -74,3 +77,32 @@ languageButtons.forEach((button) => {
 });
 
 setLanguage(localStorage.getItem("portfolio-language") || "en");
+
+function setActiveNavigation(sectionId) {
+  navigationLinks.forEach((link) => {
+    const isActive = link.hash === `#${sectionId}`;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function updateActiveNavigation() {
+  const marker = window.scrollY + siteHeader.offsetHeight + window.innerHeight * 0.3;
+  let currentSection = "";
+
+  sections.forEach((section) => {
+    if (marker >= section.offsetTop) {
+      currentSection = section.id;
+    }
+  });
+
+  setActiveNavigation(currentSection);
+}
+
+window.addEventListener("scroll", updateActiveNavigation, { passive: true });
+window.addEventListener("resize", updateActiveNavigation);
+updateActiveNavigation();
